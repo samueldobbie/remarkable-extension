@@ -4,11 +4,20 @@ import IBookmark from "../commons/IBookmark"
 const refreshBookmarks = () => {
   chrome.bookmarks.search({}, (bookmarks) => {
     const validBookmarks = getValidBookmarks(bookmarks)
-    const batchedBookmarks = getBatchedBookmarks(validBookmarks, 10)
+    const batchedBookmarks = getBatchedBookmarks(validBookmarks, 5)
 
-    batchedBookmarks.forEach((batch) => {
-      refreshFaviconBatch(batch)
-    })
+    const interval = setInterval(() => {
+      if (batchedBookmarks.length === 0) {
+        clearInterval(interval)
+        return
+      }
+
+      const batch = batchedBookmarks.shift()
+
+      if (batch) {
+        refreshFaviconBatch(batch)
+      }
+    }, 1500)
   })
 }
 
@@ -36,7 +45,9 @@ const refreshFaviconBatch = (batch: IBookmark[]) => {
           const isReady = changeInfo.status === "complete"
 
           if (isSameTab && isReady) {
-            chrome.tabs.remove(tabId)
+            setTimeout(() => {
+              chrome.tabs.remove(tabId)
+            }, 1500)
           }
         })
       }
