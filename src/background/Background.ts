@@ -1,35 +1,45 @@
-// import TabChangeInfo = chrome.tabs.TabChangeInfo
-// import Tab = chrome.tabs.Tab
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.topic === "RefreshBookmarks") {
+    chrome.bookmarks.search({ title: "Trash" }, (results) => {
+      if (results.length === 0) {
+        chrome.bookmarks.create({
+          title: "Trash",
+          parentId: "1",
+        }, (trash) => {
+          refreshBookmarks(trash.id)
+        })
+      } else {
+        const trashId = results[0].id
+        refreshBookmarks(trashId)
+      }
+      // sendResponse({});
+    })
+  }
+})
 
-// const handleInstall = () => {
-//   const welcomePageUrl = "https://samueldobbie.github.io/troogl-extension/"
-//   chrome.tabs.create({ url: welcomePageUrl })
-// }
+const refreshBookmarks = (trashId: string) => {
+  chrome.bookmarks.search({}, (bookmarks) => {
+    bookmarks.forEach((bookmark) => {
+      const { id, url } = bookmark
 
-// const handleUpdated = (tabId: number, changeInfo: TabChangeInfo, tab: Tab) => {
-//   const tabUrl = tab.url
-  
-//   if (changeInfo.status === "complete" && tabUrl) {
-//     const originUrl = new URL(tabUrl).hostname
-    
-//     chrome.storage.sync.get("autoRun", (item) => {
-//       if (item.autoRun == false) return
-
-//       chrome.storage.sync.get("disabledUrls", (item) => {
-//         const disabledUrls = item.disabledUrls || []
-  
-//         if (disabledUrls.includes(originUrl)) return
-
-//         chrome.tabs.sendMessage(tabId, {
-//           topic: "TabUpdated",
-//           payload: { url: tabUrl },
-//         })
-//       })
-//     })
-
-//   }
-// }
-
-// chrome.runtime.onInstalled.addListener(handleInstall)
-
-// chrome.tabs.onUpdated.addListener(handleUpdated)
+      if (url) {
+        fetch(url, {
+          method: "HEAD",
+          mode: "no-cors",
+        })
+          .then((response) => {
+            if (response.status === 404) {
+              chrome.bookmarks.move(id, {
+                parentId: trashId
+              })
+            }
+          })
+          .catch(() => {
+            chrome.bookmarks.move(id, {
+              parentId: trashId
+            })
+          })
+      }
+    })
+  })
+}
