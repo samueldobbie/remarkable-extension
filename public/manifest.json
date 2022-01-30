@@ -3,7 +3,7 @@
   "name": "Remarkable",
   "short_name": "Remarkable",
   "version": "1.0.0",
-  "description": "Keep your bookmarks up-to-date",
+  "description": "Keep your bookmarks clean & up-to-date",
   "permissions": [ "bookmarks" ],
   "background": {
     "service_worker": "background.js"

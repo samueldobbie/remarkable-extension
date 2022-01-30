@@ -1,10 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
 import ActionButton from "../components/action-button/ActionButton"
 import Description from "../components/description/Description"
 import Header from "../components/header/Header"
 
 function CleanBookmarkSection(): JSX.Element {
+  const [actionText, setActionText] = useState("Run clean (Instant)")
+
   const handleClean = (): void => {
+    setActionText("Cleaned!")
     chrome.runtime.sendMessage({ topic: "CleanBookmarks" })
   }
 
@@ -21,7 +24,7 @@ function CleanBookmarkSection(): JSX.Element {
 
       <ActionButton
         handleClick={handleClean}
-        text="Run clean (Instant)"
+        text={actionText}
       />
     </>
   )

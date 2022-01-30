@@ -1,10 +1,13 @@
 import Description from "../components/description/Description"
-import React from "react"
+import React, { useState } from "react"
 import ActionButton from "../components/action-button/ActionButton"
 import Header from "../components/header/Header"
 
 function RefreshSection(): JSX.Element {
+  const [actionText, setActionText] = useState("Run refresh (Slow)")
+
   const handleRefresh = (): void => {
+    setActionText("Refreshing...")
     chrome.runtime.sendMessage({ topic: "RefreshBookmarks" })
   }
 
@@ -22,7 +25,7 @@ function RefreshSection(): JSX.Element {
 
       <ActionButton
         handleClick={handleRefresh}
-        text="Run refresh (Slow)"
+        text={actionText}
       />
     </>
   )
