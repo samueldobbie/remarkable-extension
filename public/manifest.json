@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Remarkable",
+  "short_name": "Remarkable",
+  "version": "1.0.0",
+  "description": "Keep your bookmarks up-to-date",
+  "permissions": [ "bookmarks" ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
