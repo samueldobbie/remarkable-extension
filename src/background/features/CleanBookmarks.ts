@@ -1,4 +1,4 @@
-import getValidBookmarks from "../commons/Bookmarks"
+import getValidBookmarks from "../commons/GetValidBookmarks"
 
 type Trash = chrome.bookmarks.BookmarkTreeNode
 

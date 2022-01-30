@@ -1,4 +1,4 @@
-import getValidBookmarks from "../commons/Bookmarks"
+import getValidBookmarks from "../commons/GetValidBookmarks"
 import IBookmark from "../commons/IBookmark"
 
 const refreshBookmarks = () => {
