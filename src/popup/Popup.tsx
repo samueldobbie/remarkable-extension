@@ -5,6 +5,10 @@ import { ThemeProvider } from "@emotion/react"
 import { theme } from "../commons/Theme"
 
 function Popup(): JSX.Element {
+  const handleClean = (): void => {
+    chrome.runtime.sendMessage({ topic: "CleanBookmarks" })
+  }
+
   const handleRefresh = (): void => {
     chrome.runtime.sendMessage({ topic: "RefreshBookmarks" })
   }
@@ -21,18 +25,26 @@ function Popup(): JSX.Element {
         <Typography
           gutterBottom
           variant="body2"
-          sx={{
-            opacity: 0.5,
-          }}
+          sx={{ opacity: 0.5 }}
         >
-          Refresh your bookmarks to update
-          the titles and favicons. Dead bookmarks
-          will be moved to a bookmark folder
-          called "Trash" for your review.
+          Periodically run a clean to move dead
+          bookmarks to a bookmark folder called
+          "Trash" for your review.
+
+          Occasionally run a refresh to update
+          the titles and favicons of your bookmarks.
+          During the refresh all of your bookmarks
+          will be automatically opened and closeed
+          (in small batches), so may take a couple
+          of minutes.
         </Typography>
 
+        <Button onClick={handleClean}>
+          Clean bookmarks (Instant)
+        </Button>
+
         <Button onClick={handleRefresh}>
-          Refresh bookmarks
+          Refresh bookmarks (Slow)
         </Button>
       </Paper>
     </ThemeProvider>
