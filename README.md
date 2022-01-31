@@ -6,7 +6,7 @@ Remarkable is a simple extension that automatically keeps your bookmarks clean &
 
 ## Clean bookmarks
 
-Running a clean will move all dead sites (e.g. non-existent pages, 404s) to a trash folder for you to review or delete. No bookmarks will be deleted.
+Running a clean will move all dead sites (e.g. non-existent pages, 404s) to a trash folder for you to review or delete.
 
 ## Refresh bookmarks
 
