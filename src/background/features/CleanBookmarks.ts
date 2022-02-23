@@ -36,14 +36,12 @@ const checkBookmarkStatus = (trash: Trash) => {
       })
         .then((response) => {
           const isDeadBookmark =
-            response.status == 400
+            response.status == 404 ||
+            response.status == 410
 
           if (isDeadBookmark) {
             moveToTrash(id, trash.id)
           }
-        })
-        .catch(() => {
-          moveToTrash(id, trash.id)
         })
     })
   })
