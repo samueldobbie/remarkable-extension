@@ -1,7 +1,7 @@
 import React, { useState } from "react"
-import ActionButton from "../components/action-button/ActionButton"
-import Description from "../components/description/Description"
-import Header from "../components/header/Header"
+import ActionButton from "../../components/action-button/ActionButton"
+import Description from "../../components/description/Description"
+import Header from "../../components/header/Header"
 
 function CleanBookmarkSection(): JSX.Element {
   const [actionText, setActionText] = useState("Run clean (Instant)")

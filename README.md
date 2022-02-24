@@ -22,6 +22,10 @@ Running a refresh will update your bookmarks to use the most recent favicon and 
 
 During the refresh, all your bookmarks will be open (in small batches), so the process can be a bit slow if you have a large number of bookmarks.
 
+## Settings
+
+...
+
 ## Privacy
 
 Remarkable doesn't store any data at all.

@@ -1,3 +1,4 @@
+import { MailRounded } from "@mui/icons-material"
 import getValidBookmarks from "../commons/GetValidBookmarks"
 
 type Trash = chrome.bookmarks.BookmarkTreeNode

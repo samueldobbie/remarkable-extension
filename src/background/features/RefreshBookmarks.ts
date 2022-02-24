@@ -4,7 +4,7 @@ import IBookmark from "../commons/IBookmark"
 const refreshBookmarks = () => {
   chrome.bookmarks.search({}, (bookmarks) => {
     const validBookmarks = getValidBookmarks(bookmarks)
-    const batchedBookmarks = getBatchedBookmarks(validBookmarks, 5)
+    const batchedBookmarks = getBatchedBookmarks(validBookmarks, 3)
 
     const interval = setInterval(() => {
       if (batchedBookmarks.length === 0) {
@@ -17,7 +17,7 @@ const refreshBookmarks = () => {
       if (batch) {
         refreshFaviconBatch(batch)
       }
-    }, 1500)
+    }, 2500)
   })
 }
 

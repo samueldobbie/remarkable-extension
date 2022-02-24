@@ -4,12 +4,23 @@ const getValidBookmarks = (bookmarks: chrome.bookmarks.BookmarkTreeNode[]) => {
   bookmarks.forEach((bookmark) => {
     const { id, url } = bookmark
 
-    if (url) {
+    if (url && !isSpecialUrl(url)) {
       validBookmarks.push({ id, url })
     }
   })
 
   return validBookmarks
+}
+
+const isSpecialUrl = (url: string): boolean => {
+  const isNonHttpUrl =
+    url.includes(":") &&
+    !url.includes("http")
+
+  const isLocalHostUrl =
+    url.includes("://localhost")
+
+  return isNonHttpUrl || isLocalHostUrl
 }
 
 export default getValidBookmarks
