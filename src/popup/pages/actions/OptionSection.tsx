@@ -5,7 +5,7 @@ interface Props {
   setActivePage: (page: string) => void
 }
 
-function OptionsSection(props: Props): JSX.Element {
+function OptionSection(props: Props): JSX.Element {
   const { setActivePage } = props
 
   const containerStyles = {
@@ -15,6 +15,8 @@ function OptionsSection(props: Props): JSX.Element {
   const buttonStyles = {
     opacity: 0.7,
     display: "inline-block",
+    mr: 0.5,
+    ml: 0.5,
   }
 
   const handleMoveToSettings = () => {
@@ -38,10 +40,10 @@ function OptionsSection(props: Props): JSX.Element {
         onClick={handleWriteReview}
         sx={buttonStyles}
       >
-        Write review 🤞
+        Write review 🎉
       </Button>
     </Box>
   )
 }
 
-export default OptionsSection
+export default OptionSection

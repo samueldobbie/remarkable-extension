@@ -19,7 +19,7 @@ function RefreshSection(): JSX.Element {
 
       <Description>
         Updates bookmark titles and favicons. All pages will be
-        slowly opened and closed, which can take up to two minutes.
+        slowly opened and closed, which can take a few minutes.
         Please don't use your browser until the refresh is complete.
       </Description>
 
