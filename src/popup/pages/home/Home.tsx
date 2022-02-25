@@ -4,12 +4,13 @@ import CleanSection from "./CleanSection"
 import RefreshSection from "./RefreshSection"
 import OptionSection from "./OptionSection"
 import SectionDivider from "../../components/section-divider/SectionDivider"
+import Page from "../../commons/Page"
 
 interface Props {
-  setActivePage: (page: string) => void
+  setActivePage: (page: Page) => void
 }
 
-function Actions(props: Props): JSX.Element {
+function Home(props: Props): JSX.Element {
   const { setActivePage } = props
 
   return (
@@ -35,4 +36,4 @@ function Actions(props: Props): JSX.Element {
   )
 }
 
-export default Actions
+export default Home

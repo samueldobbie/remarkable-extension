@@ -1,21 +1,22 @@
 import React, { useState } from "react"
 import { Slider, Typography } from "@mui/material"
 import Description from "../../components/description/Description"
+import Topic from "../../../commons/Topic"
 
 function BatchSizeSection(): JSX.Element {
   const [batchSize, setBatchSize] = useState(2)
 
-  const handleBatchSizeChange = (updatedSize: number | number[]): void => {
-    if (updatedSize instanceof Array) {
-      setBatchSize(updatedSize[0])
-    } else {
-      setBatchSize(updatedSize)
-    }
+  const handleBatchSizeChange = (value: number | number[]): void => {
+    const updatedBatchSize = value instanceof Array
+      ? value[0]
+      : value
 
     chrome.runtime.sendMessage({
-      topic: "UpdatedBatchSize",
-      value: updatedSize,
+      topic: Topic.UpdatedBatchSize,
+      value: updatedBatchSize,
     })
+
+    setBatchSize(updatedBatchSize)
   }
 
   return (

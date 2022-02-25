@@ -4,9 +4,10 @@ import SectionDivider from "../../components/section-divider/SectionDivider"
 import OptionSection from "./OptionSection"
 import BatchDurationSection from "./BatchDurationSection"
 import BatchSizeSection from "./BatchSizeSection"
+import Page from "../../commons/Page"
 
 interface Props {
-  setActivePage: (page: string) => void
+  setActivePage: (page: Page) => void
 }
 
 function Settings(props: Props): JSX.Element {

@@ -1,8 +1,9 @@
 import React from "react"
 import { Box, Button } from "@mui/material"
+import Page from "../../commons/Page"
 
 interface Props {
-  setActivePage: (page: string) => void
+  setActivePage: (page: Page) => void
 }
 
 function OptionSection(props: Props): JSX.Element {
@@ -20,7 +21,7 @@ function OptionSection(props: Props): JSX.Element {
   }
 
   const handleMoveToSettings = () => {
-    setActivePage("settings")
+    setActivePage(Page.Settings)
   }
 
   const handleWriteReview = () => {

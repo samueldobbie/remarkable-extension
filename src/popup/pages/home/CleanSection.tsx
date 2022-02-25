@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import Topic from "../../../commons/Topic"
 import ActionButton from "../../components/action-button/ActionButton"
 import Description from "../../components/description/Description"
 import Header from "../../components/header/Header"
@@ -8,7 +9,10 @@ function CleanBookmarkSection(): JSX.Element {
 
   const handleClean = (): void => {
     setActionText("Cleaned!")
-    chrome.runtime.sendMessage({ topic: "CleanBookmarks" })
+
+    chrome.runtime.sendMessage({
+      topic: Topic.CleanBookmarks,
+    })
   }
 
   return (
