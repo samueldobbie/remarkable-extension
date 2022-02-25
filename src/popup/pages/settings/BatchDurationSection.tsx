@@ -1,21 +1,22 @@
 import React, { useState } from "react"
 import { Slider, Typography } from "@mui/material"
 import Description from "../../components/description/Description"
+import Topic from "../../../commons/Topic"
 
 function BatchDurationSection(): JSX.Element {
   const [batchDuration, setBatchDuration] = useState(6)
 
-  const handleBatchDurationChange = (updatedDuration: number | number[]): void => {
-    if (updatedDuration instanceof Array) {
-      setBatchDuration(updatedDuration[0])
-    } else {
-      setBatchDuration(updatedDuration)
-    }
+  const handleBatchDurationChange = (value: number | number[]): void => {
+    const updatedBatchDuration = value instanceof Array
+      ? value[0]
+      : value
 
     chrome.runtime.sendMessage({
-      topic: "UpdatedBatchDuration",
-      value: updatedDuration,
+      topic: Topic.UpdatedBatchDuration,
+      value: updatedBatchDuration,
     })
+
+    setBatchDuration(updatedBatchDuration)
   }
 
   return (

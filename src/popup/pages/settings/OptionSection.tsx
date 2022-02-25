@@ -1,19 +1,20 @@
 import React from "react"
 import { Button } from "@mui/material"
+import Page from "../../commons/Page"
 
 interface Props {
-  setActivePage: (page: string) => void
+  setActivePage: (page: Page) => void
 }
 
 function OptionSection(props: Props): JSX.Element {
   const { setActivePage } = props
 
-  const handleMoveToActions = () => {
-    setActivePage("actions")
+  const handleMoveToHome = () => {
+    setActivePage(Page.Home)
   }
 
   return (
-    <Button onClick={handleMoveToActions}>
+    <Button onClick={handleMoveToHome}>
       Exit settings
     </Button>
   )
