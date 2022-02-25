@@ -9,12 +9,16 @@ interface IProps {
 function ActionButton(props: IProps): JSX.Element {
   const { handleClick, text } = props
 
+  const styles = {
+    color: "white",
+  }
+
   return (
     <Button
       fullWidth
       onClick={handleClick}
       variant="contained"
-      sx={{ color: "white" }}
+      sx={styles}
     >
       {text}
     </Button>

@@ -1,8 +1,9 @@
-import { Divider } from "@mui/material"
+import { Box } from "@mui/material"
 import React from "react"
 import CleanSection from "./CleanSection"
 import RefreshSection from "./RefreshSection"
-import OptionsSection from "./OptionsSection"
+import OptionSection from "./OptionSection"
+import SectionDivider from "../../components/section-divider/SectionDivider"
 
 interface Props {
   setActivePage: (page: string) => void
@@ -11,19 +12,25 @@ interface Props {
 function Actions(props: Props): JSX.Element {
   const { setActivePage } = props
 
-  const dividerStyles = {
-    margin: 2,
-  }
-
   return (
     <>
-      <CleanSection />
-      <Divider sx={dividerStyles} />
-      <RefreshSection />
-      <Divider sx={dividerStyles} />
-      <OptionsSection
-        setActivePage={setActivePage}
-      />
+      <Box>
+        <CleanSection />
+      </Box>
+
+      <SectionDivider />
+
+      <Box>
+        <RefreshSection />
+      </Box>
+
+      <SectionDivider />
+
+      <Box>
+        <OptionSection
+          setActivePage={setActivePage}
+        />
+      </Box>
     </>
   )
 }

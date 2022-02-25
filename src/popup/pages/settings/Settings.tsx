@@ -1,6 +1,9 @@
 import React from "react"
-import { Slider, Typography } from "@mui/material"
-import Description from "../../components/description/Description"
+import { Box } from "@mui/system"
+import SectionDivider from "../../components/section-divider/SectionDivider"
+import OptionSection from "./OptionSection"
+import BatchDurationSection from "./BatchDurationSection"
+import BatchSizeSection from "./BatchSizeSection"
 
 interface Props {
   setActivePage: (page: string) => void
@@ -11,41 +14,23 @@ function Settings(props: Props): JSX.Element {
 
   return (
     <>
-      <Typography>
-        Batch size
-      </Typography>
+      <Box>
+        <BatchSizeSection />
+      </Box>
 
-      <Description>
-        Number of pages to open while refreshing.
-        Use lower values for less powerful computers.
-      </Description>
+      <SectionDivider />
 
-      <Slider
-        marks
-        min={1}
-        max={5}
-        step={1}
-        defaultValue={2}
-        valueLabelDisplay="auto"
-      />
+      <Box>
+        <BatchDurationSection />
+      </Box>
 
-      <Typography>
-        Batch duration (seconds)
-      </Typography>
+      <SectionDivider />
 
-      <Description>
-        Duration to wait between opening each batch of URLs during refresh.
-        Use higher values for less powerful computers.
-      </Description>
-
-      <Slider
-        marks
-        min={1}
-        max={10}
-        step={1}
-        defaultValue={6}
-        valueLabelDisplay="auto"
-      />
+      <Box>
+        <OptionSection
+          setActivePage={setActivePage}
+        />
+      </Box>
     </>
   )
 }
