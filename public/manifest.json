@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Remarkable",
   "short_name": "Remarkable",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Keep your bookmarks clean & up-to-date",
   "permissions": [ "bookmarks", "storage" ],
   "background": {
