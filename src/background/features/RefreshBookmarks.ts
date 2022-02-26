@@ -1,23 +1,32 @@
+import BatchSize from "../../commons/BatchSize"
 import getValidBookmarks from "../commons/GetValidBookmarks"
 import IBookmark from "../commons/IBookmark"
 
 const refreshBookmarks = () => {
-  chrome.bookmarks.search({}, (bookmarks) => {
-    const validBookmarks = getValidBookmarks(bookmarks)
-    const batchedBookmarks = getBatchedBookmarks(validBookmarks, 3)
+  chrome.storage.sync.get(BatchSize.StorageKey, (stored) =>{
+    const batchSize = stored[BatchSize.StorageKey] || BatchSize.Default
 
-    const interval = setInterval(() => {
-      if (batchedBookmarks.length === 0) {
-        clearInterval(interval)
-        return
+    chrome.bookmarks.search({}, async (bookmarks) => {
+      const validBookmarks = getValidBookmarks(bookmarks)
+      const batchedBookmarks = getBatchedBookmarks(validBookmarks, batchSize)
+
+      for (const batch of batchedBookmarks) {
+        await refreshBatch(batch)
       }
 
-      const batch = batchedBookmarks.shift()
-
-      if (batch) {
-        refreshFaviconBatch(batch)
-      }
-    }, 2500)
+      // const interval = setInterval(() => {
+      //   if (batchedBookmarks.length === 0) {
+      //     clearInterval(interval)
+      //     return
+      //   }
+  
+      //   const batch = batchedBookmarks.shift()
+  
+      //   if (batch) {
+      //     refreshBatch(batch, batchDuration)
+      //   }
+      // }, batchDuration)
+    })
   })
 }
 
@@ -32,23 +41,43 @@ const getBatchedBookmarks = (bookmarks: IBookmark[], batchSize: number) => {
   return batches
 }
 
-const refreshFaviconBatch = (batch: IBookmark[]) => {
-  batch.forEach((bookmark) => {
-    const { url } = bookmark
+const refreshBatch = (batch: IBookmark[]) => {
+  const promises = []
 
+  for (const bookmark of batch) {
+    promises.push(handleBookmark(bookmark.url))
+  }
+
+  return Promise.all(promises)
+}
+
+const handleBookmark = (url: string) => {
+  return new Promise((resolve, reject) => {
     chrome.tabs.create({ url }, (tab) => {
       const tabId = tab.id
 
       if (tabId) {
         chrome.tabs.onUpdated.addListener((updatedTabId, changeInfo) => {
-          const isSameTab = updatedTabId === tabId
-          const isReady = changeInfo.status === "complete"
+          let totalTime = 0
 
-          if (isSameTab && isReady) {
-            setTimeout(() => {
+          const interval = setInterval(() => {
+            const isSameTab = updatedTabId === tabId
+            const isReady = changeInfo.status === "complete"
+
+            if (isSameTab && isReady) {
               chrome.tabs.remove(tabId)
-            }, 1500)
-          }
+              clearInterval(interval)
+              resolve("success")
+            }
+
+            totalTime += 500
+
+            if (totalTime > 10000) {
+              chrome.tabs.remove(tabId)
+              clearInterval(interval)
+              reject("timeout")
+            }
+          }, 500)
         })
       }
     })
