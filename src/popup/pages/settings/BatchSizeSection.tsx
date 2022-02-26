@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react"
 import { Slider, Typography } from "@mui/material"
 import Description from "../../components/description/Description"
-import Storage from "../../../commons/Storage"
+import BatchSize from "../../../commons/BatchSize"
 
 function BatchSizeSection(): JSX.Element {
   const [batchSize, setBatchSize] = useState(2)
 
+  const storageKey = BatchSize.StorageKey
+
   useEffect(() => {
-    chrome.storage.sync.get(Storage.BatchSize, (stored) =>{
-      if (stored.batchSize) {
-        setBatchSize(stored.batchSize)
+    chrome.storage.sync.get(storageKey, (stored) => {
+      if (stored[storageKey]) {
+        setBatchSize(stored[storageKey])
       }
     })
   }, [])
@@ -28,7 +30,7 @@ function BatchSizeSection(): JSX.Element {
       : value
 
     chrome.storage.sync.set({
-      [Storage.BatchSize]: updatedBatchSize,
+      [storageKey]: updatedBatchSize,
     })
   }
 
