@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material"
 import React from "react"
 
-function Description({children}: any): JSX.Element {
+function Description({ children }: any): JSX.Element {
   const styles = {
     opacity: 0.5,
     fontSize: 12,

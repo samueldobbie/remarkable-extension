@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material"
 import React from "react"
 
-function Header({children}: any): JSX.Element {
+function Header({ children }: any): JSX.Element {
   const styles = {
     opacity: 0.5,
   }

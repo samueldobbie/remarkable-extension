@@ -14,18 +14,12 @@ Remarkable is a simple extension that automatically keeps your bookmarks clean &
 
 ### Clean bookmarks
 
-Running a clean will move all dead sites (e.g. non-existent pages, 404s) to a trash folder for you to review or delete.
+Moves dead bookmarks (e.g. non-existent pages) to a folder called "Trash" for you to review. No bookmarks will be deleted.
 
 ### Refresh bookmarks
 
-Running a refresh will update your bookmarks to use the most recent favicon and title for each page.
+Refreshes your bookmark favicons. All pages will be slowly opened and closed in batches, so can take some time. You can configure the batch size in the settings.
 
-During the refresh, all your bookmarks will be open (in small batches), so the process can be a bit slow if you have a large number of bookmarks.
+## Privacy & Permissions
 
-## Settings
-
-...
-
-## Privacy
-
-Remarkable doesn't store any data at all.
+Remarkable doesn't receive or store any data about you or your bookmarks. The Chrome Storage API permission is simply used to allow for configuration of the batch size in the extension settings.

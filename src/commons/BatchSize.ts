@@ -1,5 +1,5 @@
 enum BatchSize {
-  Default = 2,
+  Default = 3,
   StorageKey = "batchSize",
 }
 
