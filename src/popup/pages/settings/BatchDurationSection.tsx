@@ -1,22 +1,35 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Slider, Typography } from "@mui/material"
 import Description from "../../components/description/Description"
-import Topic from "../../../commons/Topic"
+import Storage from "../../../commons/Storage"
 
 function BatchDurationSection(): JSX.Element {
   const [batchDuration, setBatchDuration] = useState(6)
 
-  const handleBatchDurationChange = (value: number | number[]): void => {
+  useEffect(() => {
+    chrome.storage.sync.get(Storage.BatchDuration, (stored) =>{
+      if (stored.batchDuration) {
+        setBatchDuration(stored.batchDuration)
+      }
+    })
+  }, [])
+
+  const handleChange = (value: number | number[]): void => {
     const updatedBatchDuration = value instanceof Array
       ? value[0]
       : value
 
-    chrome.runtime.sendMessage({
-      topic: Topic.UpdatedBatchDuration,
-      value: updatedBatchDuration,
-    })
-
     setBatchDuration(updatedBatchDuration)
+  }
+
+  const handleChangeCommitted = (value: number | number[]): void => {
+    const updatedBatchDuration = value instanceof Array
+      ? value[0]
+      : value
+
+    chrome.storage.sync.set({
+      [Storage.BatchDuration]: updatedBatchDuration,
+    })
   }
 
   return (
@@ -35,9 +48,10 @@ function BatchDurationSection(): JSX.Element {
         min={1}
         max={10}
         step={1}
-        defaultValue={batchDuration}
+        value={batchDuration}
         valueLabelDisplay="auto"
-        onChangeCommitted={(_, value) => handleBatchDurationChange(value)}
+        onChange={(_, value) => handleChange(value)}
+        onChangeCommitted={(_, value) => handleChangeCommitted(value)}
       />
     </>
   )
