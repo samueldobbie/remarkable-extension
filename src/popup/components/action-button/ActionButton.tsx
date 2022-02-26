@@ -1,12 +1,12 @@
 import { Button } from "@mui/material"
 import React from "react"
 
-interface IProps {
+interface Props {
   handleClick: () => void
   text: string
 }
 
-function ActionButton(props: IProps): JSX.Element {
+function ActionButton(props: Props): JSX.Element {
   const { handleClick, text } = props
 
   const styles = {
