@@ -4,12 +4,6 @@
 
 Remarkable is a simple extension that automatically keeps your bookmarks clean & up-to-date.
 
-## Installation
-
-<a href="https://chrome.google.com/webstore/detail/remarkable/mjmbcbgnjacnhjpoikgilmocjlfmcogp">![](https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/YT2Grfi9vEBa2wAPzhWa.png)</a>
-
-*(Other browsers coming soon - sorry!)*
-
 ## Usage
 
 ### Clean bookmarks
